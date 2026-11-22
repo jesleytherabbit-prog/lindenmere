@@ -1,0 +1,20 @@
+// Reglas para el tracker de Lindenmere.
+// NO reemplaces tus reglas actuales: copia solo los dos bloques «match /lindenmere/...»
+// dentro de tu «match /databases/{database}/documents { ... }», junto a lo de Magic Chef.
+// Cambia UID_DE_LA_MASTER por el UID de tu usuario (Authentication > Users).
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Lo que ven los jugadores: lo lee cualquiera, solo escribe la máster.
+    match /lindenmere/publico {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == 'UID_DE_LA_MASTER';
+    }
+
+    // La trama y las fichas completas: solo la máster lee y escribe.
+    match /lindenmere/privado {
+      allow read, write: if request.auth != null && request.auth.uid == 'UID_DE_LA_MASTER';
+    }
+  }
+}

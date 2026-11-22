@@ -1,0 +1,65 @@
+{
+  "v": 1,
+  "estado": { "repeticion": 2, "franja": 1, "desgaste": 4, "revelacion": false },
+  "lugares": [
+    { "id": "l1", "x": 48, "y": 47, "r": 22, "estado": "despejado", "nombre": "Lugar de ejemplo 1", "desc": "Descripción que ven los jugadores cuando el lugar está despejado." },
+    { "id": "l2", "x": 75, "y": 24, "r": 18, "estado": "despejado", "nombre": "Lugar de ejemplo 2", "desc": "Otra descripción de prueba." },
+    { "id": "l3", "x": 22, "y": 43, "r": 18, "estado": "niebla", "nombre": "Lugar de ejemplo 3", "desc": "Con niebla: los jugadores ven el punto, pero no el nombre ni esto." },
+    { "id": "l4", "x": 44, "y": 68, "r": 20, "estado": "niebla", "nombre": "Lugar de ejemplo 4", "desc": "" },
+    { "id": "l5", "x": 73, "y": 46, "r": 15, "estado": "niebla", "nombre": "Lugar de ejemplo 5", "desc": "" },
+    { "id": "l6", "x": 25, "y": 21, "r": 17, "estado": "niebla", "nombre": "Lugar de ejemplo 6", "desc": "" },
+    { "id": "l7", "x": 26, "y": 63, "r": 12, "estado": "niebla", "nombre": "Lugar de ejemplo 7", "desc": "" },
+    { "id": "l8", "x": 60, "y": 9,  "r": 14, "estado": "niebla", "nombre": "Lugar de ejemplo 8", "desc": "" },
+    { "id": "l9", "x": 84, "y": 70, "r": 17, "estado": "oculto", "nombre": "Lugar de ejemplo 9", "desc": "Oculto: los jugadores solo ven una nube, sin punto ni nombre." }
+  ],
+  "pjs": [
+    {
+      "id": "pj1", "nombre": "Excursionista de prueba", "lema": "Una frase que se lee bajo el nombre.", "retrato": "",
+      "grupo": "Ravenclaw", "color": "#316996", "ficha": "", "lugar": "l1",
+      "arraigo": 2, "pa": [18, 22], "heridas": [0, 3], "pd": [0, 2], "pociones": [3, 5], "rituales": [1, 3],
+      "inventario": [
+        { "t": "Objeto ancla", "d": "El primer objeto de la ficha de creación.", "img": "", "i": "reloj", "ancla": true },
+        { "t": "Otro objeto", "d": "", "img": "", "i": "libreta", "ancla": false }
+      ],
+      "encargos": [ { "t": "Un encargo de ejemplo", "r": "+2 a Empatía", "usado": false } ],
+      "pistas": ["k1", "k2"], "olvidadas": ["k2"],
+      "memoriaPendiente": true,
+      "privado": { "porque": "Respuesta de la ficha.", "recuerdo": "Respuesta de la ficha.", "miedo": "Respuesta de la ficha.", "canto": "La lluvia", "aventuras": "", "fechas": "", "notas": "" }
+    },
+    {
+      "id": "pj2", "nombre": "Segunda prueba", "lema": "", "retrato": "",
+      "grupo": "Hufflepuff", "color": "#DAA515", "ficha": "", "lugar": "l2",
+      "arraigo": 6, "pa": [20, 20], "heridas": [3, 3], "pd": [1, 1], "pociones": [0, 2], "rituales": [0, 1],
+      "inventario": [], "encargos": [], "pistas": ["k1"], "olvidadas": [],
+      "memoriaPendiente": false, "privado": {}
+    }
+  ],
+  "pistas": {
+    "k1": { "t": "Una pista ya revelada.", "lugar": "l1", "dia": 1, "revelada": true },
+    "k2": { "t": "Otra pista revelada, que alguien olvidó.", "lugar": "l2", "dia": 1, "revelada": true },
+    "k3": { "t": "Una pista que todavía no se reveló.", "lugar": "l3", "dia": 2, "revelada": false }
+  },
+  "vecinos": [
+    { "id": "v1", "nombre": "Vecino de ejemplo", "rol": "Lo que los jugadores saben de él.", "paso": 1, "visible": true },
+    { "id": "v2", "nombre": "Vecino oculto", "rol": "Aún no lo conocen.", "paso": 0, "visible": false }
+  ],
+  "registro": [
+    { "turno": "Turno 1 · Día 1, mañana", "tiradas": [
+      { "pj": "pj1", "acc": "Busca algo en la plaza", "atr": { "n": "Inteligencia", "v": 3 }, "hab": { "n": "Investigación", "v": 2 }, "mod": 0, "d": 7, "dif": 9, "privada": false },
+      { "pj": "pj2", "acc": "Tirada que solo ve la máster", "atr": { "n": "Carisma", "v": 2 }, "hab": { "n": "Empatía", "v": 1 }, "mod": 0, "d": 4, "dif": 9, "privada": true }
+    ] }
+  ],
+  "trama": {
+    "indicadores": [
+      { "id": "a", "nombre": "Indicador A", "opciones": ["Sin descubrir", "Paso 1", "Paso 2", "Paso 3"], "valor": 0 },
+      { "id": "b", "nombre": "Indicador B", "opciones": ["No", "Sí"], "valor": 0 }
+    ],
+    "finales": [
+      { "nombre": "Final siempre disponible", "requisitos": [] },
+      { "nombre": "Final que pide el indicador A en el paso 3", "requisitos": [ { "tipo": "indicador", "id": "a", "min": 3 } ] },
+      { "nombre": "Final que pide 4 vecinos y el indicador B", "requisitos": [ { "tipo": "despiertos", "min": 4 }, { "tipo": "indicador", "id": "b", "min": 1 } ] }
+    ],
+    "memoria": { "texto": "Atributo + Habilidad", "base": 7 },
+    "notas": "Notas de trama que solo ve la máster en su panel."
+  }
+}
