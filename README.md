@@ -4,7 +4,7 @@ Herramientas web del Acontecimiento «Lindenmere, 1924» del foro Avada Kedavra.
 
 - `index.html`: portada.
 - `creacion/`: asistente de creación de personaje (genera el código de la ficha de excursionista para el foro).
-- `tracker/`: tracker en vivo. Lo ve cualquiera; solo la máster, con sesión iniciada, puede cambiarlo.
+- `tracker/`: por ahora, una página de espera. El tracker se publica cuando empiece el Acontecimiento.
 - `userscript/lindenmere.user.js`: userscript de Tampermonkey para pasar dados y fichas del foro al tracker.
 
 ## Cómo funciona el tracker
@@ -17,8 +17,6 @@ Los datos viven en Firestore (proyecto `appsavada`):
 El código no trae datos de la trama. La máster entra con su cuenta («Vista de máster») y, la primera vez,
 carga su JSON privado con «Importar JSON». Cada cambio se guarda en los dos documentos.
 La estructura del JSON está en [DATOS.md](DATOS.md) y hay un ejemplo en [datos.ejemplo.json](datos.ejemplo.json).
-
-**Modo prueba:** `tracker/?prueba` abre la vista de máster con los datos de ejemplo, sin conectarse para guardar.
 
 ## Configurar Firebase (una sola vez)
 
