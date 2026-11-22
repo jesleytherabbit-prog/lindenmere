@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lindenmere, 1924 · Creación de personaje</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IM+Fell+English+SC&family=La+Belle+Aurore&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root{--verde:#24352E;--verde2:#1c2a24;--musgo:#536454;--perg:#E9DFC9;--sepia:#67564A;--lluvia:#87999A;--oro:#B39A70;--vino:#714D4A;
+ --serif:'EB Garamond',Georgia,serif;--titulo:'Cormorant Garamond',Georgia,serif;--rotulo:'IM Fell English SC',Georgia,serif;--mano:'La Belle Aurore',cursive}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:var(--serif);color:var(--perg);min-height:100vh;
+ background:radial-gradient(circle at 0 0,rgba(0,0,0,.5),transparent 420px),radial-gradient(circle at 100% 100%,rgba(0,0,0,.55),transparent 520px),
+ linear-gradient(160deg,#2b3f36,var(--verde) 45%,var(--verde2)) fixed}
+body.has-bg{background:linear-gradient(rgba(20,30,25,.55),rgba(20,30,25,.85)),var(--bgimg) center/cover fixed}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 22px 60px}
+header{text-align:center;margin-bottom:24px}
+header .k{font-family:var(--rotulo);letter-spacing:4px;font-size:12px;color:var(--oro)}
+header h1{margin:4px 0 0;font-family:var(--titulo);font-weight:500;font-size:46px;letter-spacing:10px;text-transform:uppercase}
+header .s{font-family:var(--mano);font-size:22px;color:var(--oro)}
+.orn{width:240px;height:9px;margin:12px auto 0;border-top:1px solid var(--oro);border-bottom:1px solid var(--oro);position:relative}
+.orn:after{content:"";position:absolute;left:50%;top:-5px;width:13px;height:13px;margin-left:-7px;background:var(--verde);border:1px solid var(--oro);transform:rotate(45deg)}
+/* pasos */
+.steps{display:flex;justify-content:center;gap:0;margin:22px 0 26px}
+.step{display:flex;align-items:center;gap:8px;background:none;border:0;color:var(--lluvia);font-family:var(--rotulo);font-size:12px;letter-spacing:2px;cursor:pointer;padding:0}
+.step .d{width:26px;height:26px;border:1.5px solid var(--lluvia);transform:rotate(45deg);display:flex;align-items:center;justify-content:center}
+.step .d span{transform:rotate(-45deg);font-family:var(--titulo);font-size:14px}
+.step.on{color:var(--perg)}.step.on .d{border-color:var(--oro);background:var(--oro);color:var(--verde)}
+.step.done .d{border-color:var(--oro);color:var(--oro)}
+.steps .line{width:46px;height:1px;background:rgba(179,154,112,.45);margin:0 12px;align-self:center}
+.grid{display:grid;grid-template-columns:1fr 560px;gap:30px;align-items:start}
+/* panel del paso */
+.panel{position:relative;background:linear-gradient(170deg,rgba(36,53,46,.92),rgba(26,39,33,.95));border:1px solid rgba(179,154,112,.7);outline:1px solid rgba(179,154,112,.3);outline-offset:-7px;padding:28px 30px 24px;box-shadow:0 10px 30px rgba(0,0,0,.45);min-height:460px}
+.panel .c{position:absolute;width:22px;height:22px;border:2px solid var(--oro)}
+.c1{top:10px;left:10px;border-right:0!important;border-bottom:0!important}.c2{top:10px;right:10px;border-left:0!important;border-bottom:0!important}
+.c3{bottom:10px;left:10px;border-right:0!important;border-top:0!important}.c4{bottom:10px;right:10px;border-left:0!important;border-top:0!important}
+.pane{display:none;animation:in .35s ease}.pane.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.pane h2{margin:0;font-family:var(--titulo);font-weight:500;font-size:32px}
+.pane .lead{font-style:italic;color:#c9cfc6;margin:4px 0 18px;font-size:16px}
+label.f{display:block;margin-top:14px;font-family:var(--rotulo);font-size:11px;letter-spacing:2px;color:var(--oro)}
+input[type=text],input[type=url],input[type=number],textarea,select{width:100%;margin-top:5px;background:rgba(233,223,201,.95);border:1px solid var(--sepia);color:#2e2722;font:16px var(--serif);padding:7px 10px;border-radius:0}
+textarea{height:64px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--oro);outline-offset:1px}
+.help{font-size:13px;color:var(--lluvia);font-style:italic;margin-top:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+/* elección del augurey */
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+.opt{position:relative;display:flex;flex-direction:column;align-self:stretch;font-family:var(--serif);border:1px solid rgba(179,154,112,.55);background:rgba(0,0,0,.25);color:var(--perg);padding:0;cursor:pointer;text-align:center;transition:.25s;overflow:hidden}
+.opt:hover .art{transform:scale(1.04)}
+.opt:hover{transform:translateY(-4px);border-color:var(--oro);box-shadow:0 10px 20px rgba(0,0,0,.4)}
+.opt .art{height:300px;background:center 20%/cover no-repeat;transition:transform .6s ease;display:flex;align-items:center;justify-content:center}
+.opt .art svg{width:64px;height:64px;opacity:.85}
+.opt .t{display:block;font-family:var(--rotulo);letter-spacing:5px;font-size:16px;padding:12px 0 4px}
+.opt .d{display:block;font-family:var(--serif);font-style:italic;font-size:14px;color:#c9cfc6;padding:0 14px 14px}
+.opt:not(.on) .art{filter:saturate(.75) brightness(.85)}
+.choice.picked .opt:not(.on){opacity:.55}
+.opt.on{border:2px solid var(--oro);box-shadow:0 0 0 1px var(--oro),0 0 24px rgba(179,154,112,.4)}
+.opt.on:after{content:"ELEGIDO";position:absolute;top:10px;right:10px;font-family:var(--rotulo);font-size:10px;letter-spacing:2px;background:var(--oro);color:var(--verde);padding:2px 8px}
+.opt.muerte .art{background-color:#1a2420}.opt.lluvia .art{background-color:#26363a}
+/* inventario editable */
+.slots{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:10px}
+.slot{aspect-ratio:1;border:1px solid rgba(179,154,112,.5);background:rgba(0,0,0,.28) center/70% no-repeat;cursor:pointer;position:relative;transition:.2s}
+.slot:hover{border-color:var(--oro);transform:translateY(-2px)}
+.slot.anc{border:2px solid var(--oro);box-shadow:inset 0 0 16px rgba(179,154,112,.35)}
+.slot.sel{box-shadow:0 0 0 2px var(--perg)}
+.slot .n{position:absolute;left:0;right:0;bottom:-20px;font-size:12px;text-align:center;color:#c9cfc6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.slot.empty:after{content:"+";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--titulo);font-size:30px;color:var(--oro);opacity:.7}
+.itemform{margin-top:34px;border-top:1px solid rgba(179,154,112,.4);padding-top:6px}
+.itemform h3{margin:8px 0 0;font-family:var(--rotulo);font-weight:400;letter-spacing:2px;font-size:13px;color:var(--oro)}
+/* navegación */
+.nav{display:flex;justify-content:space-between;margin-top:26px}
+.btn{background:var(--verde);color:var(--perg);border:1px solid var(--oro);outline:1px solid rgba(179,154,112,.4);outline-offset:2px;padding:9px 22px;font-family:var(--rotulo);letter-spacing:3px;font-size:13px;cursor:pointer;transition:.2s}
+.btn:hover{background:var(--oro);color:var(--verde)}
+.btn.vino{background:var(--vino)}.btn.vino:hover{background:#8a5d59;color:var(--perg)}
+.btn.ghost{background:transparent}
+.btn[disabled]{opacity:.35;pointer-events:none}
+/* vista previa */
+.preview{position:sticky;top:20px}
+.preview .lab{font-family:var(--rotulo);letter-spacing:3px;font-size:11px;color:var(--oro);text-align:center;margin-bottom:10px}
+.out{margin-top:16px}
+.out textarea{height:120px;font:12px 'Special Elite',monospace;background:rgba(0,0,0,.35);color:var(--perg);border:1px solid rgba(179,154,112,.5)}
+.copied{font-family:var(--rotulo);font-size:11px;letter-spacing:2px;color:#9fbf92;margin-left:12px;opacity:0;transition:opacity .3s}
+.copied.on{opacity:1}
+.miss{margin-top:10px;font-size:14px;color:#d6a39e;font-style:italic}
+@media (max-width:1100px){.grid{grid-template-columns:1fr}.preview{position:static}}
+.idgrid{display:grid;grid-template-columns:170px 1fr;gap:22px;align-items:start}
+.frame{position:relative;width:170px;aspect-ratio:2/3}
+.frame .ph{position:absolute;left:15%;right:15%;top:12%;bottom:12%;border-radius:50%;background:radial-gradient(ellipse at 50% 35%,#efe6cf,#cdbd98) center/cover no-repeat;
+ display:flex;align-items:center;justify-content:center;font-family:var(--titulo);font-size:64px;color:var(--musgo);filter:sepia(.25)}
+.frame .fr{position:absolute;inset:0;background:center/100% 100% no-repeat;pointer-events:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}
+.frame .cap{position:absolute;left:0;right:0;bottom:-26px;text-align:center;font-family:var(--mano);font-size:16px;color:var(--oro)}
+@media (max-width:640px){.idgrid{grid-template-columns:1fr}.frame{margin:0 auto 30px}}
+/* ficha generada (mismo estilo que se pega en el foro) */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital@0;1&family=IM+Fell+English+SC&family=La+Belle+Aurore&display=swap');.lf{position:relative!important;width:520px!important;margin:0 auto!important;padding:22px 24px 18px!important;box-sizing:border-box!important;text-align:left!important;background:linear-gradient(165deg,#2b3f36,#1c2a24)!important;border:1px solid #B39A70!important;outline:1px solid rgba(179,154,112,.35)!important;outline-offset:-7px!important;box-shadow:0 8px 24px rgba(0,0,0,.5)!important;color:#E9DFC9!important}.lf,.lf :where(div,span,p,a){font-family:'EB Garamond',Georgia,serif!important}.lf-c{position:absolute!important;width:18px!important;height:18px!important;border:2px solid #B39A70!important}.lf-c1{top:10px!important;left:10px!important;border-right:0!important;border-bottom:0!important}.lf-c2{top:10px!important;right:10px!important;border-left:0!important;border-bottom:0!important}.lf-c3{bottom:10px!important;left:10px!important;border-right:0!important;border-top:0!important}.lf-c4{bottom:10px!important;right:10px!important;border-left:0!important;border-top:0!important}.lf-top{display:block!important;text-align:center!important;font-family:'IM Fell English SC',Georgia,serif!important;font-size:11px!important;letter-spacing:4px!important;color:#B39A70!important;margin-bottom:14px!important}.lf-hero{display:flex!important;gap:18px!important;align-items:center!important}.lf-pic{flex:0 0 110px!important;width:110px!important;height:110px!important;border-radius:50%!important;border:3px solid #B39A70!important;box-shadow:0 0 0 5px #1c2a24,0 0 0 6px rgba(179,154,112,.5)!important;background:#E9DFC9 center/cover no-repeat!important;filter:sepia(.25)!important}.lf-name{display:block!important;font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:600!important;font-size:32px!important;line-height:1!important;color:#E9DFC9!important}.lf-grp{display:inline-block!important;margin-top:8px!important;font-family:'IM Fell English SC',Georgia,serif!important;font-size:10px!important;letter-spacing:2px!important;padding:2px 10px!important;background:#536454!important;color:#E9DFC9!important}.lf-quote{display:block!important;font-family:'La Belle Aurore',cursive!important;font-size:18px!important;color:#B39A70!important;margin-top:8px!important}.lf-h{display:block!important;margin:18px 0 8px!important;font-family:'IM Fell English SC',Georgia,serif!important;font-size:12px!important;letter-spacing:3px!important;color:#B39A70!important;border-bottom:1px solid rgba(179,154,112,.45)!important;padding-bottom:4px!important}.lf-q{display:block!important;font-style:italic!important;font-size:15px!important;color:#c9cfc6!important;margin-bottom:8px!important}.lf-opts{display:flex!important;gap:10px!important}.lf-opt{flex:1!important;text-align:center!important;padding:8px 0!important;border:1px solid #B39A70!important;background:rgba(0,0,0,.25)!important;font-family:'IM Fell English SC',Georgia,serif!important;font-size:14px!important;letter-spacing:4px!important;color:#E9DFC9!important}.lf-inv{display:flex!important;gap:8px!important}.lf-slot{flex:1!important;text-align:center!important}.lf-box{display:block!important;height:76px!important;border:1px solid rgba(179,154,112,.5)!important;background:rgba(0,0,0,.28) center/70% no-repeat!important}.lf-slot.ancla .lf-box{border:2px solid #B39A70!important;box-shadow:inset 0 0 16px rgba(179,154,112,.35)!important}.lf-lbl{display:block!important;font-size:12px!important;line-height:1.2!important;color:#c9cfc6!important;margin-top:5px!important}.lf-slot.ancla .lf-lbl{color:#E9DFC9!important}.lf-tag{display:block!important;font-family:'IM Fell English SC',Georgia,serif!important;font-size:9px!important;letter-spacing:1px!important;color:#B39A70!important}.lf-row{display:block!important;font-size:15px!important;line-height:1.4!important;padding:5px 0!important;border-bottom:1px dotted rgba(179,154,112,.3)!important}.lf-row b{font-family:'IM Fell English SC',Georgia,serif!important;font-weight:normal!important;font-size:11px!important;letter-spacing:2px!important;color:#B39A70!important;margin-right:8px!important}.lf-ooc{display:block!important;margin-top:14px!important;padding-top:8px!important;border-top:1px solid rgba(179,154,112,.45)!important;font-size:13px!important;color:#87999A!important;text-align:center!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header>
+  <div class="k">LINDENMERE, 1924 · SOCIEDAD DE NATURALISTAS MÁGICOS</div>
+  <h1>Creación de personaje</h1>
+  <div class="s">Avistamiento de augureys, primavera de 2034</div>
+  <div class="orn"></div>
+ </header>
+
+ <div class="steps" id="steps"></div>
+
+ <div class="grid">
+  <div class="panel"><span class="c c1"></span><span class="c c2"></span><span class="c c3"></span><span class="c c4"></span>
+
+   <div class="pane" data-p="0">
+    <h2>Identidad</h2><div class="lead">¿Quién se apunta a la excursión?</div>
+    <div class="idgrid"><div class="frame"><div class="ph" id="ph">?</div><div class="fr" id="fr"></div><div class="cap" id="cap">Sin nombre</div></div><div>
+    <label class="f" style="margin-top:0">NOMBRE DEL PERSONAJE</label><input type="text" id="nombre" placeholder="Nombre y apellido">
+    <div class="two">
+     <div><label class="f">GRUPO</label><select id="grupo"></select></div>
+     <div><label class="f">ENLACE A SU FICHA</label><input type="url" id="ficha" placeholder="https://hp-avada-kedavra.foroactivo.com/..."></div>
+    </div>
+    <label class="f">AVATAR (ENLACE DIRECTO A LA IMAGEN)</label><input type="url" id="avatar" placeholder="https://i.imgur.com/xxxxxxx.png">
+    <div class="help">Usa el enlace que termina en .png o .jpg. Se ve en la ficha de la derecha.</div>
+    <label class="f">UNA FRASE QUE LO DEFINA</label><input type="text" id="frase" maxlength="80" placeholder="En sus palabras o en las de otro.">
+    </div></div>
+   </div>
+
+   <div class="pane" data-p="1">
+    <h2>El canto del augurey</h2><div class="lead">Durante siglos se dijo que su canto anunciaba la muerte. Hoy muchos dicen que solo anuncia lluvia. ¿Qué cree tu personaje?</div>
+    <div class="choice">
+     <button class="opt muerte" data-v="muerte"><span class="art" id="artMuerte"><svg viewBox="0 0 24 24" fill="none" stroke="#B39A70" stroke-width="1.2"><path d="M12 3c-4 0-7 3-7 7 0 3 2 5 3 6v3h8v-3c1-1 3-3 3-6 0-4-3-7-7-7z"/><circle cx="9.5" cy="10.5" r="1.4"/><circle cx="14.5" cy="10.5" r="1.4"/><path d="M10 19v2M14 19v2M12 19v2"/></svg></span><span class="t">LA MUERTE</span><span class="d">Algunas supersticiones existen por algo.</span></button>
+     <button class="opt lluvia" data-v="lluvia"><span class="art" id="artLluvia"><svg viewBox="0 0 24 24" fill="none" stroke="#B39A70" stroke-width="1.2"><path d="M7 14a4 4 0 0 1 .5-8A5 5 0 0 1 17 7a3.5 3.5 0 0 1 0 7z"/><path d="M8 17l-1 3M12 17l-1 3M16 17l-1 3"/></svg></span><span class="t">LA LLUVIA</span><span class="d">Es un pájaro. Solo un pájaro.</span></button>
+    </div>
+   </div>
+
+   <div class="pane" data-p="2">
+    <h2>Equipaje</h2><div class="lead">Una excursión de un día. La primera casilla, con borde dorado, es su objeto personal más importante. Haz clic en una casilla para rellenarla.</div>
+    <div class="slots" id="slots"></div>
+    <div class="itemform">
+     <h3 id="itemTitle">OBJETO PERSONAL</h3>
+     <label class="f">NOMBRE DEL OBJETO</label><input type="text" id="iNombre">
+     <label class="f">IMAGEN (OPCIONAL, ENLACE DIRECTO)</label><input type="url" id="iImg" placeholder="https://i.imgur.com/xxxxxxx.png">
+     <div id="descWrap"><label class="f">¿POR QUÉ ES IMPORTANTE?</label><textarea id="iDesc" maxlength="200"></textarea></div>
+    </div>
+   </div>
+
+   <div class="pane" data-p="3">
+    <h2>Cuaderno de campo</h2><div class="lead">Unas pocas líneas. Nadie más que la máster las leerá con atención.</div>
+    <label class="f">¿POR QUÉ SE APUNTÓ A VER LOS AUGUREYS?</label><textarea id="porque" maxlength="200"></textarea>
+    <label class="f">UN RECUERDO FELIZ</label><textarea id="recuerdo" maxlength="200"></textarea>
+    <label class="f">UN MIEDO</label><input type="text" id="miedo" maxlength="120">
+   </div>
+
+   <div class="pane" data-p="4">
+    <h2>Fuera de rol</h2><div class="lead">Lo que piden las normas, y lo que necesito para organizarme.</div>
+    <label class="f">OTRAS AVENTURAS EN LAS QUE PARTICIPA (NOMBRE Y FECHA)</label><input type="text" id="aventuras" placeholder="Ninguna">
+    <div class="two">
+     <div><label class="f">PUNTOS DE DESTINO DISPONIBLES</label><input type="number" id="pd" min="0" max="7" value="1"></div>
+     <div><label class="f">LIMITACIONES DE FECHAS</label><input type="text" id="fechas" placeholder="Ninguna"></div>
+    </div>
+    <div class="out">
+     <label class="f">CÓDIGO PARA PEGAR EN EL TEMA DE ORGANIZACIÓN</label>
+     <textarea id="code" readonly></textarea>
+     <div style="margin-top:10px"><button class="btn vino" id="copy">COPIAR CÓDIGO</button><span class="copied" id="copied">COPIADO</span></div>
+     <div class="miss" id="miss"></div>
+    </div>
+   </div>
+
+   <div class="nav"><button class="btn ghost" id="prev">ANTERIOR</button><button class="btn" id="next">SIGUIENTE</button></div>
+  </div>
+
+  <div class="preview"><div class="lab">ASÍ SE VERÁ TU FICHA EN EL FORO</div><div id="card"></div></div>
+ </div>
+</div>
+
+<script>
+/* ======= CONFIGURACIÓN DE ASSETS (cambia estos enlaces cuando tengas las imágenes) ======= */
+const ASSETS = {
+  // Imágenes guardadas en la carpeta img/ del repositorio.
+  // Si prefieres Imgur, cambia la ruta por el enlace (por ejemplo 'https://i.imgur.com/ZW8oqIb.jpeg').
+  fondo:  'img/fondo.jpg',         // fondo de toda la página
+  muerte: 'img/carta-muerte.jpg',  // carta "La muerte"
+  lluvia: 'img/carta-lluvia.jpg',  // carta "La lluvia"
+  marco:  'img/marco.png'          // marco ovalado del retrato (PNG transparente)
+};
+const GRUPOS = [['Gryffindor','#A3000D'],['Hufflepuff','#DAA515'],['Ravenclaw','#316996'],['Slytherin','#005C1F'],
+  ['Ex-Gryffindor','#803E3A'],['Ex-Hufflepuff','#d1cb9e'],['Ex-Ravenclaw','#769aaf'],['Ex-Slytherin','#4ca07d'],['Otros Adultos','#ae7952']];
+const PASOS = ['Identidad','El canto','Equipaje','Cuaderno','Fuera de rol'];
+
+const S = { nombre:'', grupo:'Otros Adultos', ficha:'', avatar:'', frase:'', canto:'', items:[{t:'',img:'',d:''},{t:'',img:''},{t:'',img:''},{t:'',img:''},{t:'',img:''}],
+  porque:'', recuerdo:'', miedo:'', aventuras:'', pd:1, fechas:'' };
+let paso = 0, slotSel = 0;
+const $ = s => document.querySelector(s);
+const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+
+if(ASSETS.fondo){ document.body.style.setProperty('--bgimg',`url('${ASSETS.fondo}')`); document.body.classList.add('has-bg'); }
+if(ASSETS.muerte){ $('#artMuerte').style.backgroundImage=`url('${ASSETS.muerte}')`; $('#artMuerte').innerHTML=''; }
+if(ASSETS.marco){ $('#fr').style.backgroundImage=`url('${ASSETS.marco}')`; }
+if(ASSETS.lluvia){ $('#artLluvia').style.backgroundImage=`url('${ASSETS.lluvia}')`; $('#artLluvia').innerHTML=''; }
+$('#grupo').innerHTML = GRUPOS.map(([g])=>`<option ${g===S.grupo?'selected':''}>${g}</option>`).join('');
+
+function renderSteps(){
+  $('#steps').innerHTML = PASOS.map((p,i)=>`${i?'<span class="line"></span>':''}<button class="step ${i===paso?'on':''} ${i<paso?'done':''}" data-i="${i}"><span class="d"><span>${i+1}</span></span>${p.toUpperCase()}</button>`).join('');
+  $('#steps').querySelectorAll('.step').forEach(b=>b.onclick=()=>go(+b.dataset.i));
+  document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('on',+p.dataset.p===paso));
+  $('#prev').disabled = paso===0;
+  $('#next').textContent = paso===PASOS.length-1 ? 'COPIAR CÓDIGO' : 'SIGUIENTE';
+}
+function go(i){ paso=Math.max(0,Math.min(PASOS.length-1,i)); renderSteps(); }
+
+function renderSlots(){
+  $('#slots').innerHTML = S.items.map((it,i)=>`<div class="slot ${i===0?'anc':''} ${i===slotSel?'sel':''} ${it.t||it.img?'':'empty'}" data-i="${i}" style="${it.img?`background-image:url('${esc(it.img)}')`:''}"><span class="n">${esc(it.t)||(i===0?'Objeto personal':'')}</span></div>`).join('');
+  $('#slots').querySelectorAll('.slot').forEach(s=>s.onclick=()=>{ slotSel=+s.dataset.i; loadItem(); renderSlots(); });
+}
+function loadItem(){
+  const it=S.items[slotSel];
+  $('#itemTitle').textContent = slotSel===0 ? 'OBJETO PERSONAL' : 'MOCHILA · CASILLA '+(slotSel+1);
+  $('#iNombre').value=it.t; $('#iImg').value=it.img; $('#iDesc').value=it.d||'';
+  $('#descWrap').style.display = slotSel===0 ? 'block' : 'none';
+}
+['iNombre','iImg','iDesc'].forEach(id=>$('#'+id).oninput=e=>{
+  const it=S.items[slotSel]; if(id==='iNombre') it.t=e.target.value; if(id==='iImg') it.img=e.target.value.trim(); if(id==='iDesc') it.d=e.target.value;
+  renderSlots(); render();
+});
+
+// ======= la ficha que se pega en el foro =======
+function cardHTML(){
+  const col=(GRUPOS.find(g=>g[0]===S.grupo)||['', '#536454'])[1];
+  const slot=(it,i)=>`<span class="lf-slot${i===0?' ancla':''}"><span class="lf-box" style="background-image:url('${esc(it.img)}')"></span>${i===0?'<span class="lf-tag">OBJETO PERSONAL</span>':''}<span class="lf-lbl">${esc(it.t)||'&nbsp;'}</span></span>`;
+  const opts = S.canto ? `<span class="lf-opt">${S.canto==='muerte'?'LA MUERTE':'LA LLUVIA'}</span>` : `<span class="lf-opt">LA MUERTE</span><span class="lf-opt">LA LLUVIA</span>`;
+  const nombre = S.ficha ? `<a href="${esc(S.ficha)}" style="color:#E9DFC9 !important;text-decoration:none !important">${esc(S.nombre)||'Nombre del PJ'}</a>` : (esc(S.nombre)||'Nombre del PJ');
+  const datos = {v:1,nombre:S.nombre,grupo:S.grupo,ficha:S.ficha,avatar:S.avatar,frase:S.frase,canto:S.canto,items:S.items,porque:S.porque,recuerdo:S.recuerdo,miedo:S.miedo,aventuras:S.aventuras,pd:S.pd,fechas:S.fechas};
+  return `<center><div class="lf"><span class="lf-c lf-c1"></span><span class="lf-c lf-c2"></span><span class="lf-c lf-c3"></span><span class="lf-c lf-c4"></span>`+
+   `<span class="lf-top">EXCURSIONISTA · AVISTAMIENTO 2034</span>`+
+   `<div class="lf-hero"><span class="lf-pic" style="background-image:url('${esc(S.avatar)}')"></span><div>`+
+   `<span class="lf-name">${nombre}</span><span class="lf-grp" style="background:${col} !important">${esc(S.grupo).toUpperCase()}</span><span class="lf-quote">${esc(S.frase)||'&nbsp;'}</span></div></div>`+
+   `<span class="lf-h">EL CANTO DEL AUGUREY ANUNCIA...</span><div class="lf-opts">${opts}</div>`+
+   `<span class="lf-h">EQUIPAJE</span><div class="lf-inv">${S.items.map(slot).join('')}</div>`+
+   (S.items[0].d?`<span class="lf-row"><b>${esc(S.items[0].t||'OBJETO PERSONAL').toUpperCase()}</b>${esc(S.items[0].d)}</span>`:'')+
+   `<span class="lf-h">CUADERNO</span>`+
+   `<span class="lf-row"><b>POR QUÉ VIENE</b>${esc(S.porque)||'&nbsp;'}</span>`+
+   `<span class="lf-row"><b>UN RECUERDO FELIZ</b>${esc(S.recuerdo)||'&nbsp;'}</span>`+
+   `<span class="lf-row"><b>UN MIEDO</b>${esc(S.miedo)||'&nbsp;'}</span>`+
+   `<span class="lf-ooc">Otras aventuras: ${esc(S.aventuras)||'ninguna'} · Puntos de Destino: ${S.pd} · Fechas: ${esc(S.fechas)||'sin limitaciones'}</span>`+
+   `<span class="lf-data" style="display:none !important">${esc(JSON.stringify(datos))}</span>`+
+   `</div></center>`;
+}
+const STYLE = document.querySelector('style').textContent.split('/* ficha generada (mismo estilo que se pega en el foro) */')[1].trim();
+function render(){
+  const ph=$('#ph'); ph.style.backgroundImage=S.avatar?`url('${S.avatar.replace(/'/g,'%27')}')`:''; ph.textContent=S.avatar?'':(S.nombre?S.nombre[0].toUpperCase():'?');
+  $('#cap').textContent=S.nombre||'Sin nombre';
+  const html=cardHTML();
+  $('#card').innerHTML=html;
+  $('#code').value=`<style>${STYLE}</style>${html}`;
+  const faltan=[]; if(!S.nombre) faltan.push('el nombre'); if(!S.ficha) faltan.push('el enlace a la ficha'); if(!S.canto) faltan.push('qué anuncia el canto'); if(!S.items[0].t) faltan.push('el objeto personal');
+  $('#miss').textContent = faltan.length ? 'Todavía falta: '+faltan.join(', ')+'.' : '';
+}
+// enlazar campos
+[['nombre','nombre'],['ficha','ficha'],['avatar','avatar'],['frase','frase'],['porque','porque'],['recuerdo','recuerdo'],['miedo','miedo'],['aventuras','aventuras'],['fechas','fechas'],['pd','pd']]
+ .forEach(([id,k])=>$('#'+id).oninput=e=>{ S[k]= id==='pd' ? Math.max(0,+e.target.value||0) : e.target.value.trim(); render(); });
+$('#grupo').onchange=e=>{ S.grupo=e.target.value; render(); };
+document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{ S.canto=b.dataset.v; document.querySelectorAll('.opt').forEach(x=>x.classList.toggle('on',x===b)); $('.choice').classList.add('picked'); render(); });
+
+async function copy(){
+  const t=$('#code'); let ok=false;
+  try{ await navigator.clipboard.writeText(t.value); ok=true; }catch(e){ t.select(); try{ ok=document.execCommand('copy'); }catch(_){} }
+  if(ok){ $('#copied').classList.add('on'); setTimeout(()=>$('#copied').classList.remove('on'),1800); } else { t.select(); }
+}
+$('#copy').onclick=copy;
+$('#prev').onclick=()=>go(paso-1);
+$('#next').onclick=()=>{ if(paso===PASOS.length-1) copy(); else go(paso+1); };
+
+renderSteps(); renderSlots(); loadItem(); render();
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# Nunca publicar
+*.privado.json
+PRIVADO*
+DIRECTIVA*
+# solo referencia local
+foro/
+.DS_Store
+.claude/

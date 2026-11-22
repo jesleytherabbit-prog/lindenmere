@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lindenmere, 1924</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400&family=EB+Garamond:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+<style>
+:root{--verde:#24352E;--perg:#E9DFC9;--oro:#B39A70;--lluvia:#87999A;--vino:#714D4A}
+*{box-sizing:border-box}html,body{margin:0}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px;color:var(--perg);font-family:'EB Garamond',Georgia,serif;
+  background:radial-gradient(circle at 0 0,rgba(0,0,0,.5),transparent 420px),radial-gradient(circle at 100% 100%,rgba(0,0,0,.55),transparent 520px),linear-gradient(160deg,#2b3f36 0%,#24352E 45%,#1c2a24 100%) fixed}
+main{width:min(560px,100%);text-align:center;border:1px solid rgba(179,154,112,.6);outline:1px solid rgba(179,154,112,.3);outline-offset:-7px;padding:34px 26px 30px;background:rgba(0,0,0,.12)}
+.bird{width:96px;height:90px;margin:0 auto 6px;background:url('https://i.imgur.com/heokY6j.png') center/contain no-repeat;filter:drop-shadow(0 0 8px rgba(179,154,112,.4));animation:p 6s ease-in-out infinite}
+@keyframes p{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.k{font-family:'IM Fell English SC',Georgia,serif;letter-spacing:3px;font-size:12px;color:var(--oro)}
+h1{margin:6px 0 0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(34px,8vw,50px);letter-spacing:10px;text-indent:10px;text-transform:uppercase;line-height:1}
+.s{font-family:'IM Fell English SC',Georgia,serif;letter-spacing:5px;color:var(--oro);margin-top:4px}
+p{font-style:italic;color:#d9cdb5;margin:18px 0 24px}
+nav{display:grid;gap:12px}
+a{display:block;padding:14px 18px;border:1px solid var(--oro);color:var(--perg);text-decoration:none;font-family:'IM Fell English SC',Georgia,serif;letter-spacing:3px;font-size:16px;background:linear-gradient(180deg,#2f4639,#24352E);transition:.25s}
+a small{display:block;font-family:'EB Garamond',Georgia,serif;font-style:italic;letter-spacing:0;font-size:14px;color:var(--lluvia);margin-top:3px}
+a:hover,a:focus{background:var(--perg);color:var(--verde)}a:hover small,a:focus small{color:var(--vino)}
+</style>
+</head>
+<body>
+<main>
+  <div class="bird" aria-hidden="true"></div>
+  <div class="k">ACONTECIMIENTO · AVADA KEDAVRA</div>
+  <h1>Lindenmere</h1>
+  <div class="s">1924</div>
+  <p>Un avistamiento de augureys, un pueblo entre colinas y un sábado de junio.</p>
+  <nav>
+    <a href="creacion/">Creación de personaje<small>Arma tu ficha de excursionista y copia el código para el foro</small></a>
+    <a href="tracker/">Tracker<small>El mapa, los personajes, el cuaderno y el registro de tiradas</small></a>
+  </nav>
+</main>
+</body>
+</html>
