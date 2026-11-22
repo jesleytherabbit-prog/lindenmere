@@ -65,6 +65,11 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--oro);outline-off
 .slot.anc{border:2px solid var(--oro);box-shadow:inset 0 0 16px rgba(179,154,112,.35)}
 .slot.sel{box-shadow:0 0 0 2px var(--perg)}
 .slot .n{position:absolute;left:0;right:0;bottom:-20px;font-size:12px;text-align:center;color:#c9cfc6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gal{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin:4px 0 8px}
+.gal button{aspect-ratio:1;border:1px solid rgba(179,154,112,.35);background:rgba(0,0,0,.22) center/78% no-repeat;cursor:pointer;padding:0;transition:.2s}
+.gal button:hover{border-color:var(--oro);transform:translateY(-2px)}
+.gal button.on{border:2px solid var(--oro);box-shadow:0 0 12px rgba(179,154,112,.45);background-color:rgba(179,154,112,.12)}
+@media (max-width:640px){.gal{grid-template-columns:repeat(4,1fr)}}
 .slot.empty:after{content:"+";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--titulo);font-size:30px;color:var(--oro);opacity:.7}
 .itemform{margin-top:34px;border-top:1px solid rgba(179,154,112,.4);padding-top:6px}
 .itemform h3{margin:8px 0 0;font-family:var(--rotulo);font-weight:400;letter-spacing:2px;font-size:13px;color:var(--oro)}
@@ -137,7 +142,8 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--oro);outline-off
     <div class="itemform">
      <h3 id="itemTitle">OBJETO PERSONAL</h3>
      <label class="f">NOMBRE DEL OBJETO</label><input type="text" id="iNombre">
-     <label class="f">IMAGEN (OPCIONAL, ENLACE DIRECTO)</label><input type="url" id="iImg" placeholder="https://i.imgur.com/xxxxxxx.png">
+     <label class="f">ELIGE UN OBJETO DEL EQUIPAJE</label><div class="gal" id="gal"></div>
+     <label class="f">O PEGA TU PROPIA IMAGEN (ENLACE DIRECTO)</label><input type="url" id="iImg" placeholder="https://i.imgur.com/xxxxxxx.png">
      <div id="descWrap"><label class="f">¿POR QUÉ ES IMPORTANTE?</label><textarea id="iDesc" maxlength="200"></textarea></div>
     </div>
    </div>
@@ -210,14 +216,33 @@ function renderSlots(){
   $('#slots').innerHTML = S.items.map((it,i)=>`<div class="slot ${i===0?'anc':''} ${i===slotSel?'sel':''} ${it.t||it.img?'':'empty'}" data-i="${i}" style="${it.img?`background-image:url('${esc(it.img)}')`:''}"><span class="n">${esc(it.t)||(i===0?'Objeto personal':'')}</span></div>`).join('');
   $('#slots').querySelectorAll('.slot').forEach(s=>s.onclick=()=>{ slotSel=+s.dataset.i; loadItem(); renderSlots(); });
 }
+// Objetos ilustrados del equipaje (en GitHub Pages, con enlace completo para que se vean en el foro)
+const OBJ_URL = 'https://jesleytherabbit-prog.github.io/lindenmere/creacion/img/objetos/';
+const OBJETOS = [['prismaticos','Prismáticos'],['brujula','Brújula'],['mapa','Mapa plegado'],['reloj','Reloj de bolsillo'],
+  ['camara','Cámara de fuelle'],['libreta','Libreta de cuero'],['pluma-tintero','Pluma y tintero'],['libro-dragon','Libro de dragones'],
+  ['farol','Farol'],['paraguas','Paraguas'],['bufanda','Bufanda de lana'],['termo','Termo'],
+  ['sandwich','Sándwich envuelto'],['caramelos','Bolsa de caramelos'],['pocion','Frasco de poción'],['frascos','Frascos vacíos']];
+function renderGal(){
+  const it=S.items[slotSel];
+  $('#gal').innerHTML = OBJETOS.map(([f,n])=>`<button type="button" class="${it.img===OBJ_URL+f+'.png'?'on':''}" data-f="${f}" title="${n}" aria-label="${n}" style="background-image:url('img/objetos/${f}.png')"></button>`).join('');
+  $('#gal').querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    const it=S.items[slotSel], o=OBJETOS.find(x=>x[0]===b.dataset.f), url=OBJ_URL+o[0]+'.png';
+    const eraDeGaleria = !it.t || OBJETOS.some(x=>x[1]===it.t);
+    if(it.img===url){ it.img=''; if(eraDeGaleria) it.t=''; }
+    else { it.img=url; if(eraDeGaleria) it.t=o[1]; }
+    $('#iNombre').value=it.t; $('#iImg').value=it.img; renderGal(); renderSlots(); render();
+  });
+}
 function loadItem(){
   const it=S.items[slotSel];
   $('#itemTitle').textContent = slotSel===0 ? 'OBJETO PERSONAL' : 'MOCHILA · CASILLA '+(slotSel+1);
   $('#iNombre').value=it.t; $('#iImg').value=it.img; $('#iDesc').value=it.d||'';
   $('#descWrap').style.display = slotSel===0 ? 'block' : 'none';
+  renderGal();
 }
 ['iNombre','iImg','iDesc'].forEach(id=>$('#'+id).oninput=e=>{
   const it=S.items[slotSel]; if(id==='iNombre') it.t=e.target.value; if(id==='iImg') it.img=e.target.value.trim(); if(id==='iDesc') it.d=e.target.value;
+  if(id==='iImg') renderGal();
   renderSlots(); render();
 });
 
