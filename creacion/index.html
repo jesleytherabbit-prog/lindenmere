@@ -249,13 +249,13 @@ function loadItem(){
 // ======= la ficha que se pega en el foro =======
 function cardHTML(){
   const col=(GRUPOS.find(g=>g[0]===S.grupo)||['', '#536454'])[1];
-  const slot=(it,i)=>`<span class="lf-slot${i===0?' ancla':''}"><span class="lf-box" style="background-image:url('${esc(it.img)}')"></span>${i===0?'<span class="lf-tag">OBJETO PERSONAL</span>':''}<span class="lf-lbl">${esc(it.t)||'&nbsp;'}</span></span>`;
+  const slot=(it,i)=>`<span class="lf-slot${i===0?' ancla':''}"><span class="lf-box" style="${it.img?`background-image:url('${esc(it.img)}') !important`:''}"></span>${i===0?'<span class="lf-tag">OBJETO PERSONAL</span>':''}<span class="lf-lbl">${esc(it.t)||'&nbsp;'}</span></span>`;
   const opts = S.canto ? `<span class="lf-opt">${S.canto==='muerte'?'LA MUERTE':'LA LLUVIA'}</span>` : `<span class="lf-opt">LA MUERTE</span><span class="lf-opt">LA LLUVIA</span>`;
   const nombre = S.ficha ? `<a href="${esc(S.ficha)}" style="color:#E9DFC9 !important;text-decoration:none !important">${esc(S.nombre)||'Nombre del PJ'}</a>` : (esc(S.nombre)||'Nombre del PJ');
   const datos = {v:1,nombre:S.nombre,grupo:S.grupo,ficha:S.ficha,avatar:S.avatar,frase:S.frase,canto:S.canto,items:S.items,porque:S.porque,recuerdo:S.recuerdo,miedo:S.miedo,aventuras:S.aventuras,pd:S.pd,fechas:S.fechas};
   return `<center><div class="lf"><span class="lf-c lf-c1"></span><span class="lf-c lf-c2"></span><span class="lf-c lf-c3"></span><span class="lf-c lf-c4"></span>`+
    `<span class="lf-top">EXCURSIONISTA · AVISTAMIENTO 2034</span>`+
-   `<div class="lf-hero"><span class="lf-pic" style="background-image:url('${esc(S.avatar)}')"></span><div>`+
+   `<div class="lf-hero"><span class="lf-pic" style="${S.avatar?`background-image:url('${esc(S.avatar)}') !important`:''}"></span><div>`+
    `<span class="lf-name">${nombre}</span><span class="lf-grp" style="background:${col} !important">${esc(S.grupo).toUpperCase()}</span><span class="lf-quote">${esc(S.frase)||'&nbsp;'}</span></div></div>`+
    `<span class="lf-h">EL CANTO DEL AUGUREY ANUNCIA...</span><div class="lf-opts">${opts}</div>`+
    `<span class="lf-h">EQUIPAJE</span><div class="lf-inv">${S.items.map(slot).join('')}</div>`+
